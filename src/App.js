@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { CartProvider } from './context/CartContext';
 import ProductList from './components/ProductList';
+import Cart from './components/Cart';
 import Spinner from './components/Spinner';
 import FilterButtons from './components/FilterButtons';
 import './App.css';
@@ -28,11 +30,16 @@ const App = () => {
     ? products 
     : products.filter(product => product.category === filter);
 
+  console.log('Filtered Products:', filteredProducts); // Проверка
+
   return (
-    <div className="app-container">
-      <FilterButtons setFilter={setFilter} selectedFilter={filter} />
-      {loading ? <Spinner /> : <ProductList products={filteredProducts} />}
-    </div>
+    <CartProvider>
+      <div className="app-container">
+        <FilterButtons setFilter={setFilter} selectedFilter={filter} />
+        {loading ? <Spinner /> : <ProductList products={filteredProducts} />}
+        <Cart />
+      </div>
+    </CartProvider>
   );
 };
 

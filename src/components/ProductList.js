@@ -1,18 +1,14 @@
 import React from 'react';
+import Product from './Product';
 import './ProductList.css';
 
 const ProductList = ({ products }) => {
+  console.log('Rendering ProductList:', products); // Проверка
+
   return (
     <div className="product-list">
-      {products.map(product => (
-        <div key={product.id} className="product-card">
-          <img src={product.image} alt={product.title} className="product-image" />
-          <div className="product-info">
-            <p className="product-category">{product.category}</p>
-            <h2 className="product-title">{product.title}</h2>
-            <p className="product-price">${product.price}</p>
-          </div>
-        </div>
+      {products.map((product) => (
+        <Product key={product.id} product={product} />
       ))}
     </div>
   );
